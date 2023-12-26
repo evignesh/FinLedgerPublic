@@ -1,0 +1,92 @@
+[versions]
+agp = "8.3.0-alpha18"
+gradle = "8.3.0-alpha18"
+kotlin = "1.9.21"
+coreKtx = "1.12.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+lifecycleRuntimeKtx = "2.6.2"
+activityCompose = "1.8.2"
+composeBom = "2023.10.01"
+appcompat = "1.6.1"
+coroutine = "1.7.3"
+koin_version = "3.5.3"
+navigationCompose = "2.7.6"
+runtimeCompose = "2.6.2"
+
+[libraries]
+# must have libraries
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+tools-build-gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+# bridges the gap between compose and android view system
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "runtimeCompose"}
+
+# compose libraries
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+# coroutine libraries
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
+
+# koin di
+io-insert-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin_version" }
+
+#compose test libraries
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" } # This should be a debug implementation. https://developer.android.com/jetpack/compose/testing#setup
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+
+# test libraries
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+
+# android test libraries
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+
+[plugins]
+# These plugins are fetched in runtime. Do not remove. jetbrainsKotlinAndroid is not used. Instead called the direct module
+# plugin("kotlin-android") in CustomConventionGradlePlugin file
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+
+[bundles]
+compose = [
+    "androidx-activity-compose",
+    "androidx-ui",
+    "androidx-material3",
+    "androidx-ui-graphics",
+    "androidx-compose-foundation",
+    "androidx-navigation-compose",
+    "androidx-lifecycle-runtime-compose",
+    "androidx-ui-tooling-preview" # have this in implementation to show it in compose preview in android studio
+]
+compose-libs-debug-implementation = [
+    "androidx-ui-tooling",
+    "androidx-ui-test-manifest"
+]
+compose-ui-testing = [
+    "androidx-ui-test-junit4"
+]
+
+ui-testing = [
+    "androidx-junit",
+    "androidx-espresso-core"
+]
+
+koin = [
+    "io-insert-koin-compose"
+]

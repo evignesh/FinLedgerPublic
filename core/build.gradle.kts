@@ -1,0 +1,19 @@
+plugins {
+    id(libs.plugins.androidLibrary.get().pluginId)
+}
+apply<LibraryGradlePlugin>()
+
+android {
+    namespace = "com.evicky.core"
+}
+
+dependencies {
+    implementation(project(":utility"))
+
+    implementation(libs.androidx.core.ktx)
+
+    implementation(libs.bundles.koin)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.bundles.ui.testing)
+}
