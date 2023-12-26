@@ -1,4 +1,4 @@
-package com.evicky.feature.register
+package com.evicky.feature.postlogin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import com.evicky.feature.R
 
 @Composable
-fun RegisterScreen(phoneNumber: String) {
+fun PostLoginScreen(phoneNumber: String) {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(50.dp),
@@ -38,8 +38,8 @@ fun RegisterScreen(phoneNumber: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun RegisterScreenPreview() {
+fun PostLoginScreenPreview() {
     MaterialTheme {
-        RegisterScreen("23232")
+        PostLoginScreen("23232")
     }
 }

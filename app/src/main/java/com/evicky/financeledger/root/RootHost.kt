@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.evicky.feature.login.signInScreen
-import com.evicky.feature.register.navigateToRegisterScreen
-import com.evicky.feature.register.registerScreen
+import com.evicky.feature.postlogin.navigateToPostLoginScreen
+import com.evicky.feature.postlogin.postLoginScreen
 import com.evicky.feature.util.SIGNIN_ROUTE
-import com.evicky.utility.logger.Log
 
 @Composable
 internal fun RootHost() {
@@ -18,10 +17,10 @@ internal fun RootHost() {
     ) {
         signInScreen(
             onSignInPress = {
-                rootController.navigateToRegisterScreen(it)
+                rootController.navigateToPostLoginScreen(it)
             }
         )
-        registerScreen()
+        postLoginScreen()
     }
 
 }
