@@ -11,7 +11,7 @@ fun NavController.navigateToPostLoginScreen(data: String) {
 
 private const val PHONE_NO_KEY = "phoneNumberKey"
 
-fun NavGraphBuilder.postLoginScreen() {
+fun NavGraphBuilder.postLoginNavGraph() {
     composable(route = "$POST_LOGIN_ROUTE/{$PHONE_NO_KEY}") {
         val receivedPhoneNumber = it.arguments?.getString(PHONE_NO_KEY) ?: ""
         PostLoginScreen(phoneNumber = receivedPhoneNumber)

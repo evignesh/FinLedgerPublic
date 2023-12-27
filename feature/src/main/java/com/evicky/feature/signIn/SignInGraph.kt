@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.evicky.feature.util.SIGNIN_ROUTE
 import org.koin.androidx.compose.koinViewModel
 
-fun NavGraphBuilder.signInScreen(
+fun NavGraphBuilder.signInNavGraph(
     onSignInPress: (String) -> Unit
 ) {
     composable(route = SIGNIN_ROUTE) {
