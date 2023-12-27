@@ -1,4 +1,4 @@
-package com.evicky.feature.login
+package com.evicky.feature.signIn
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image

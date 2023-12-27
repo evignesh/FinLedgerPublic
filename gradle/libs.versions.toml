@@ -14,6 +14,8 @@ coroutine = "1.7.3"
 koin_version = "3.5.3"
 navigationCompose = "2.7.6"
 runtimeCompose = "2.6.2"
+firebaseBom = "32.7.0"
+kotlinxSerializationJson = "1.3.0"
 
 [libraries]
 # must have libraries
@@ -36,6 +38,13 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+#firebase libraries
+firebaseBom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+
+# serialization/parcelization libraries
+kotlinxSerializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 # coroutine libraries
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
@@ -61,7 +70,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-
+kotlinParcelize = { id = "kotlin-parcelize", version.ref = "kotlin" }
 
 [bundles]
 compose = [

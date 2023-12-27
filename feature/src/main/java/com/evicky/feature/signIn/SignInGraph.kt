@@ -1,4 +1,4 @@
-package com.evicky.feature.login
+package com.evicky.feature.signIn
 
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle

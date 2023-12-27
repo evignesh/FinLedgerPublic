@@ -35,6 +35,9 @@ dependencies {
     debugImplementation(libs.bundles.compose.libs.debug.implementation)
     androidTestImplementation(libs.bundles.compose.ui.testing)
 
+//    implementation(platform(libs.firebaseBom))
+//    implementation(libs.firestore)
+
     implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
