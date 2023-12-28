@@ -50,7 +50,7 @@ class SignInViewModel(private val savedStateHandle: SavedStateHandle, private va
 
     fun readDataFromDataSource() {
         viewModelScope.launch(coroutineDispatcherProvider.io()) {
-            val signInLocalData = signInUseCase.readData(path = "Users/UserId")
+            val signInLocalData = signInUseCase.readData(path = "Users/UserId", logTag = logTag)
             Log.i("$logTag:readDataFromDataSource", "signInLocalData: $signInLocalData")
         }
     }

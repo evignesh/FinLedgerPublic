@@ -12,8 +12,8 @@ class SignInUseCase(private val signInRepo: ISignInRepo) {
         return signInRepo.writeData(documentPath = "Users/UserId", data = data, logTag = logTag)
     }
 
-    suspend fun readData(path: String): SignInLocalData {
-        val signInRemoteData = Json.decodeFromString<SignInRemoteData>(signInRepo.readData(path = path).toString())
+    suspend fun readData(path: String, logTag: String): SignInLocalData {
+        val signInRemoteData = Json.decodeFromString<SignInRemoteData>(signInRepo.readData(logTag = logTag, path = path).toString())
         return SignInLocalData(id = signInRemoteData.id, name = signInRemoteData.name)
     }
 

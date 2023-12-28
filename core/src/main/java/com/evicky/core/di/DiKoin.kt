@@ -1,7 +1,7 @@
 package com.evicky.core.di
 
-import com.evicky.core.dataSource.FireStore
-import com.evicky.core.dataSource.IFireStore
+import com.evicky.core.dataSource.DynamoDb
+import com.evicky.core.dataSource.Firestore
 import com.evicky.core.repo.ISignInRepo
 import com.evicky.core.repo.SignInRepo
 import com.evicky.core.usecase.SignInUseCase
@@ -21,7 +21,8 @@ val repoModule = module {
 }
 
 val dataSourceModule = module {
-    singleOf(::FireStore) { bind<IFireStore>()}
+    singleOf(::Firestore)
+    singleOf(::DynamoDb)
 }
 
 val coroutineDispatcherProviderModule = module {

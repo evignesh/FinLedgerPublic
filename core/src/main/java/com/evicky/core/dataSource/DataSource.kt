@@ -4,8 +4,8 @@ import com.evicky.utility.logger.Log
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-interface IFireStore {
-    suspend fun writeToFireStoreDocument(
+interface IDataSource {
+    suspend fun writeData(
         documentPath: String,
         data: Any,
         logTag: String,
@@ -13,9 +13,9 @@ interface IFireStore {
         writeFailureLogMessage: String
     ): Boolean
 
-    suspend fun readFromFireStoreDocument(documentPath: String): Map<String, Any>?
+    suspend fun readData(logTag: String, documentPath: String): Map<String, Any>?
 
-    suspend fun deleteFireStoreDocument(
+    suspend fun deleteData(
         documentPath: String,
         logTag: String,
         writeFailureLogMessage: String
@@ -23,9 +23,9 @@ interface IFireStore {
 
 }
 
-class FireStore : IFireStore {
+class Firestore : IDataSource {
 //    private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    override suspend fun writeToFireStoreDocument(
+    override suspend fun writeData(
         documentPath: String,
         data: Any,
         logTag: String,
@@ -36,11 +36,11 @@ class FireStore : IFireStore {
 //            fireStore.document(documentPath).set(data)
 //                .addOnCompleteListener { task ->
 //                    if (task.isSuccessful) {
-//                        Log.i(logTag, "$writeSuccessLogMessage: $documentPath")
+//                        Log.i(logTag, "Data write success to firestore db $writeSuccessLogMessage: $documentPath")
 //                        if (continuation.isActive) continuation.resume(true)
 //                    } else {
 //                        Log.e(logTag,
-//                            "$writeFailureLogMessage: $documentPath. Error Message: ${task.exception?.message}",
+//                            "Data write failed to firestore db $writeFailureLogMessage: $documentPath. Error Message: ${task.exception?.message}",
 //                            task.exception)
 //                        if (continuation.isActive) continuation.resume(false)
 //                    }
@@ -48,16 +48,16 @@ class FireStore : IFireStore {
 //            sendSuccessResultIfOfflineForDocumentWrite(fireStore.document(documentPath), continuation)
         } catch (exception: Exception) {
             Log.e(logTag,
-                "Exception from execution: $writeFailureLogMessage: $documentPath. Error Message: ${exception.message}",
+                "Exception from execution: Data write failed to firestore db. $writeFailureLogMessage: $documentPath. Error Message: ${exception.message}",
                 exception)
             if (continuation.isActive) continuation.resume(false)
         }
     }
 
-    override suspend fun readFromFireStoreDocument(documentPath: String): Map<String, Any>? =
+    override suspend fun readData(logTag: String, documentPath: String): Map<String, Any>? =
 //        fireStore.document(documentPath).get().await().data
         null
-    override suspend fun deleteFireStoreDocument(
+    override suspend fun deleteData(
         documentPath: String,
         logTag: String,
         writeFailureLogMessage: String,
@@ -66,11 +66,11 @@ class FireStore : IFireStore {
 //            fireStore.document(documentPath).delete()
 //                .addOnCompleteListener { task ->
 //                    if (task.isSuccessful) {
-//                        Log.i(logTag, "Delete Success : $documentPath")
+//                        Log.i(logTag, "Delete Success in firestore db: $documentPath")
 //                        if (continuation.isActive) continuation.resume(true)
 //                    } else {
 //                        Log.e(logTag,
-//                            "$writeFailureLogMessage: $documentPath. Error Message: ${task.exception?.message}",
+//                            "Delete Failure in firestore db: $writeFailureLogMessage: $documentPath. Error Message: ${task.exception?.message}",
 //                            task.exception)
 //                        if (continuation.isActive) continuation.resume(false)
 //                    }
@@ -78,7 +78,7 @@ class FireStore : IFireStore {
 //                }
         } catch (exception: Exception) {
             Log.e(logTag,
-                "Exception from execution: $writeFailureLogMessage: $documentPath. Error Message: ${exception.message}",
+                "Exception from execution: Delete Failure in firestore db: $writeFailureLogMessage: $documentPath. Error Message: ${exception.message}",
                 exception)
             if (continuation.isActive) continuation.resume(false)
         }
@@ -98,3 +98,30 @@ class FireStore : IFireStore {
 //        if (it.metadata.isFromCache && continuation.isActive) continuation.resume(true)
 //    }
 //}
+
+class DynamoDb : IDataSource {
+    override suspend fun writeData(
+        documentPath: String,
+        data: Any,
+        logTag: String,
+        writeSuccessLogMessage: String,
+        writeFailureLogMessage: String,
+    ): Boolean {
+        Log.i(logTag, "Data write success to dynamo db $writeSuccessLogMessage: $documentPath")
+        return true
+    }
+
+    override suspend fun readData(logTag: String, documentPath: String): Map<String, Any>? {
+        Log.i(logTag, "Data read success from dynamo db $documentPath")
+        return null
+    }
+
+    override suspend fun deleteData(
+        documentPath: String,
+        logTag: String,
+        writeFailureLogMessage: String,
+    ): Boolean {
+        Log.i(logTag, "Data delete success in dynamo db $documentPath")
+        return true
+    }
+}
